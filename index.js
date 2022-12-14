@@ -58,17 +58,16 @@ app.post('/novels/post', (req, res) => {
     return res.send(`Novel has been added: ${req.body.Title}`);
 }) 
 
-// deleting a title *** FIX REQUIRED
-// BASING THIS ON APP.POST DOES NOT WORK
-// STANDARD APP.DELETE SUGGESTIONS ALSO DON'T WORK
-// I THINK POSTMAN SETTINGS ARE NOT CONDUSIVE - DOES DELETE REQUIRE A BODY? 
-// I DON'T RECALL BODY BEING THERE EARLIER ONLY PARAMS
+// NOTE: when using Postman pay VERY careful attention to:
+// * Header contents (duplicate header key value pairs must be deleted not just unticked)
+// * Body being set to JSON
 
+// deleting a title 
 
-app.delete('/novels/delete/:id', (req, res) => {
+  app.delete('/novels/delete/:id', (req, res) => {
     console.log(req.body);
-    //res.send(`DELETE request to homepage: ${req.body.ID}`)
-  });
+    res.send(`DELETE requested ID: ${req.body.ID}`)
+  })
 
 // now app needs to listen to a port
 // always include console.log for 'health' check
