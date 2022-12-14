@@ -1,15 +1,18 @@
 // start building your own server by: 
 //by calling express and body-parser libararies
 // make sure they are installed as dependencies in package.json
-// if not add vis terminal eg npm i express
+// if not add via terminal eg npm i express
 
 const express = require('express');
-const bodyParser = require('body-parser');
 
 // create app variable which calls express function
 // to start a new express application
 
 const app = express();
+
+const bodyParser = require('body-parser');
+
+
 
 //app variable will now use the body-parser.json to parse the json request body
 //to turn it in to a js string
@@ -39,23 +42,26 @@ const books = [
     {"ID": 2,"Title": "The Almond Picker", "Author": "Simonetta Angello Hornby", "Style": "Historical Italian Romance"},
     {"ID": 3,"Title": "The Girl from the Sea", "Author": "James Aldridge", "Style": "France in the 1950's"},
     {"ID": 4,"Title": "The Cat's Table", "Author": "Michael Ondaatje", "Style": "Childhood Adventure"}
-];
+]
+;
 
-app.get('/novels', (req, res) => {
-    res.json(books);
+
+app.get('/novels/get', (req, res) => {
+    return res.send(`${books}`);
 });
 
 // adding a new book using post
 
-app.post('/novels', (req, res) => {
-    let newBook = req.body.user;
-    return res.send(`Novel has been added: ${newBook}`);
-})
+app.post('/novels/post', (req, res) => {
+    let newBook = req.books;// how do i get book id 5 in here from postman? or do i add it from here? ;
+    //***also how can i see the whole array with the addition?  */
+    return res.send(`Novel has been added: ${newBook},  ${books + newBook}`);
+}) 
 
 // deleting a title
 
-app.delete('/novels', (req, res) => {
-    let delNovel = req.body.ID;
+app.delete('/novels/delete', (req, res) => {
+    let delNovel = req.body.ID;// this doesn't work either 
     return res.send(`Novel ID: 2 has been deleted: ${delNovel}`);
 })
 
