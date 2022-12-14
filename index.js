@@ -3,14 +3,14 @@
 // make sure they are installed as dependencies in package.json
 // if not add via terminal eg npm i express
 
-const express = require('express');
+const express = require("express");
 
 // create app variable which calls express function
 // to start a new express application
 
-const app = express();
+const app = (express());
 
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 
 
 
@@ -33,6 +33,7 @@ app.use(bodyParser.json());
 // home page
 app.get('/', (req, res) => {
     res.json(req.body);
+    // health check ok res.json(`This is the home page`);
 })
 
 // code for creating Postman collection
@@ -47,15 +48,15 @@ const books = [
 
 
 app.get('/novels/get', (req, res) => {
-    return res.send(`${books}`);
+   return res.send(books);
 });
 
 // adding a new book using post
 
+
 app.post('/novels/post', (req, res) => {
-    let newBook = req.books;// how do i get book id 5 in here from postman? or do i add it from here? ;
-    //***also how can i see the whole array with the addition?  */
-    return res.send(`Novel has been added: ${newBook},  ${books + newBook}`);
+    let newBook = req.body;  
+    res.send(`Novel has been added: ${newBook}`);
 }) 
 
 // deleting a title
