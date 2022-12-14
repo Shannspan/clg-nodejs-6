@@ -43,8 +43,7 @@ const books = [
     {"ID": 2,"Title": "The Almond Picker", "Author": "Simonetta Angello Hornby", "Style": "Historical Italian Romance"},
     {"ID": 3,"Title": "The Girl from the Sea", "Author": "James Aldridge", "Style": "France in the 1950's"},
     {"ID": 4,"Title": "The Cat's Table", "Author": "Michael Ondaatje", "Style": "Childhood Adventure"}
-]
-;
+];
 
 
 app.get('/novels/get', (req, res) => {
@@ -55,16 +54,21 @@ app.get('/novels/get', (req, res) => {
 
 
 app.post('/novels/post', (req, res) => {
-    let newBook = req.body;  
-    res.send(`Novel has been added: ${newBook}`);
+    console.log(req.body);
+    return res.send(`Novel has been added: ${req.body.Title}`);
 }) 
 
-// deleting a title
+// deleting a title *** FIX REQUIRED
+// BASING THIS ON APP.POST DOES NOT WORK
+// STANDARD APP.DELETE SUGGESTIONS ALSO DON'T WORK
+// I THINK POSTMAN SETTINGS ARE NOT CONDUSIVE - DOES DELETE REQUIRE A BODY? 
+// I DON'T RECALL BODY BEING THERE EARLIER ONLY PARAMS
 
-app.delete('/novels/delete', (req, res) => {
-    let delNovel = req.body.ID;// this doesn't work either 
-    return res.send(`Novel ID: 2 has been deleted: ${delNovel}`);
-})
+
+app.delete('/novels/delete/:id', (req, res) => {
+    console.log(req.body);
+    //res.send(`DELETE request to homepage: ${req.body.ID}`)
+  });
 
 // now app needs to listen to a port
 // always include console.log for 'health' check
